@@ -1,13 +1,17 @@
+import client from "@libs/server/client";
+import withHandler from "@libs/server/withHadler";
 import { NextApiRequest, NextApiResponse,  } from "next";
-import client from "../../../libs/server/client";
 
-export default async function handler(
+async function handler(
   req:NextApiRequest, 
   res:NextApiResponse 
 ) {
-  if(req.method !== "POST") {
+  // withHandler가 아래 함수를 대신 실행하게 됨
+  /* if(req.method !== "POST") {
     res.status(401).end();
-  }
+  } */
   console.log(req.body);
-  res.status(200).end();
+  return res.status(200).end();
 }
+
+export default withHandler("POST", handler);
